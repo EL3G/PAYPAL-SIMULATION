@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de PayPal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/paypal_logo.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/paypal_logo.png" alt="PayPal">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Enviar y solicitar</a></li>
+                <li><a href="#">Cartera</a></li>
+                <li><a href="#">Movimientos</a></li>
+                <li><a href="#">Ayuda</a></li>
+            </ul>
+        </nav>
+        <div class="actions">
+            <button><svg viewBox="0 0 24 24" width="20" height="20"><path d="M19.79 12.9l-5.24 5.24c-.39.39-1.02.39-1.41 0l-5.24-5.24c-.39-.39-.39-1.02 0-1.41l5.24-5.24c.39-.39 1.02-.39 1.41 0l5.24 5.24c.39.39.39 1.02 0 1.41zM12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path></svg></button>
+            <button>Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard">
+            <div class="saldo-container">
+                <h2>Saldo de PayPal</h2>
+                <p class="saldo">USD 1,000,000.00</p>
+                <p class="disponible">Disponible</p>
+                <button class="transferir-fondos">Transferir fondos</button>
+            </div>
+
+            <div class="movimientos-container">
+                <h2>Movimientos recientes</h2>
+                <p>Consulte el dinero enviado y recibido. Aquí encontrará sus movimientos recientes con PayPal.</p>
+                <button class="mostrar-todos">Mostrar todos</button>
+            </div>
+        </section>
+
+        <section class="actions-panel">
+            <div class="action-buttons">
+                <button class="enviar-btn" onclick="showEnviarForm()">Enviar</button>
+                <button class="solicitar-btn">Solicitar</button>
+            </div>
+
+            <div class="quick-actions">
+                <div class="quick-action-item">
+                    <div class="icon"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg></div>
+                    <p>Crear un formato de pago</p>
+                </div>
+                <div class="quick-action-item">
+                    <div class="icon"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M19 8h-8v4h8v-4zm0 6h-8v4h8v-4zM5 8h2v4H5v-4zm0 6h2v4H5v-4zm12-9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2zm-1 2H8v2h8V5zm0 14H8v-2h8v2zM6 5v2H5V5h1zm0 14v-2H5v2h1z"></path></svg></div>
+                    <p>Asociar tarjeta o cuenta bancaria</p>
+                </div>
+                <div class="quick-action-item">
+                    <div class="icon"><svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 16a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2zm0-6a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2zm0 6a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2z"></path></svg></div>
+                    <p>Más</p>
+                </div>
+            </div>
+
+            <div class="enviar-de-nuevo">
+                <h3>Envío de nuevo</h3>
+                <div class="buscar-container">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+                    <input type="text" placeholder="Buscar">
+                </div>
+            </div>
+        </section>
+
+        <section id="enviar-form" class="overlay">
+            <div class="form-container">
+                <h2>Enviar dinero</h2>
+                <button class="close-btn" onclick="hideEnviarForm()">&times;</button>
+                <div class="input-group">
+                    <label for="recipient">Correo electrónico, nombre de usuario o móvil:</label>
+                    <input type="text" id="recipient" placeholder="Ingrese el destinatario">
+                </div>
+                <div class="input-group">
+                    <label for="amount">Importe:</label>
+                    <input type="number" id="amount" placeholder="Ingrese el importe en USD">
+                </div>
+                <button class="continuar-btn" onclick="showConfirmacion()">Continuar</button>
+            </div>
+        </section>
+
+        <section id="confirmacion" class="overlay">
+            <div class="confirmacion-container">
+                <h2>Revisar su pago</h2>
+                <button class="close-btn" onclick="hideConfirmacion()">&times;</button>
+                <p>Enviar a: <span id="confirm-recipient"></span></p>
+                <p>Importe: USD <span id="confirm-amount"></span></p>
+                <button class="enviar-pago-btn" onclick="showComprobante()">Enviar pago ahora</button>
+            </div>
+        </section>
+
+        <section id="comprobante" class="overlay">
+            <div class="comprobante-container">
+                <h2>Pago Enviado</h2>
+                <p><strong>Transferencia Exitosa</strong></p>
+                <p>Su pago ha sido enviado y está siendo procesado.</p>
+                <p>El dinero debería llegar a la cuenta del destinatario en un plazo de <strong>24 a 48 horas hábiles</strong>.</p>
+                <p><strong>Detalles de la transferencia:</strong></p>
+                <ul>
+                    <li>Destinatario: <span id="comprobante-recipient"></span></li>
+                    <li>Importe Enviado: USD <span id="comprobante-amount"></span></li>
+                    <li>Fecha y Hora: <span id="comprobante-fecha"></span></li>
+                    <li>Estado: Procesando</li>
+                </ul>
+                <button onclick="hideComprobante()">Cerrar</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
